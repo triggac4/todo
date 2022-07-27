@@ -9,13 +9,16 @@ const CustomPlainButton = ({ title, onPress, color, size }) => {
       fontWeight:  generalStyle.fontWeight.bold,
       color: color ??  generalStyle.colorScheme.black,
     },
-    borderLessButton: {
+    button: {
       backgroundColor: "transparent",
       shadowColor: "transparent",
     },
   });
   return (
-    <Pressable style={style.borderLessButton} onPress={onPress}>
+    <Pressable style={
+      ({pressed})=>[
+        {opacity:pressed? 0.5:1.0},
+      style.button]} onPress={onPress}>
       <Text style={style.buttonText}>{title}</Text>
     </Pressable>
   );

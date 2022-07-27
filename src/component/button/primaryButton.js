@@ -9,7 +9,7 @@ const PrimaryButton = ({ title, onPress, color, backgroundColor, size }) => {
       fontWeight: generalStyle.fontWeight.bold,
       color: color ?? generalStyle.colorScheme.white,
     },
-    borderLessButton: {
+    button: {
       backgroundColor: backgroundColor ?? generalStyle.colorScheme.primary,
       shadowColor: generalStyle.colorScheme.black,
       shadowOffset: {
@@ -24,7 +24,10 @@ const PrimaryButton = ({ title, onPress, color, backgroundColor, size }) => {
     },
   });
   return (
-    <Pressable style={style.borderLessButton} onPress={onPress}>
+    <Pressable style={
+      ({pressed})=>[
+        {opacity:pressed? 0.8:1.0},
+      style.button]} onPress={onPress}>
       <Text style={style.buttonText}>{title}</Text>
     </Pressable>
   );

@@ -25,7 +25,10 @@ const BorderButton = ({
     },
   });
   return (
-    <Pressable style={style.borderLessButton} onPress={onPress}>
+    <Pressable style={
+      ({pressed})=>[
+        {opacity:pressed? 0.5:1.0},
+      style.borderLessButton]} onPress={onPress}>
       <Text style={style.buttonText}>{title}</Text>
     </Pressable>
   );
