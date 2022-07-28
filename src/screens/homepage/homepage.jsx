@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, SafeAreaView } from "react-native";
-import BorderButton from "../component/button/borderButton";
-import PrimaryButton from "../component/button/primaryButton";
-import CustomTextfield from "../component/form/textfield";
-import generalStyling from "../utility/generalStyling";
+import { View, Text, StyleSheet, SafeAreaView, StatusBar } from "react-native";
+import BorderButton from "../../component/button/borderButton";
+import PrimaryButton from "../../component/button/primaryButton";
+import CustomTextfield from "../../component/form/textfield";
+import generalStyling from "../../utility/generalStyling";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import AuthScreen from "./authentication";
+import AuthScreen from "../authentication";
+import TaskCard from "../../component/card/taskCard";
+import TaskList from "./listTask";
 
 const BottomNav = createBottomTabNavigator();
 export const screenName = "homepage";
@@ -21,10 +23,8 @@ const style = StyleSheet.create({
 });
 const Screen = () => {
   return (
-    <SafeAreaView>
-      <View style={style.container}>
-        <PrimaryButton title={"Sign In"} onPress={() => {}} />
-      </View>
+    <SafeAreaView style={{ marginTop: StatusBar.currentHeight }}>
+      <TaskList />
     </SafeAreaView>
   );
 };
@@ -49,7 +49,7 @@ const Screenee = () => {
   );
 };
 const Homepage = (props) => {
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(true);
   return authenticated ? (
     <View
       style={{
@@ -59,9 +59,17 @@ const Homepage = (props) => {
         height: "100%",
       }}
     >
-      <BottomNav.Navigator>
-        <BottomNav.Screen name="all" component={Screen} />
-        <BottomNav.Screen name="completed" component={Screene} />
+      <BottomNav.Navigator defaultScreenOptions={{ headerShown: false }}>
+        <BottomNav.Screen
+          name="all"
+          component={Screen}
+          options={{ headerShown: false }}
+        />
+        <BottomNav.Screen
+          name="completed"
+          component={Screene}
+          options={{ headerShown: false }}
+        />
       </BottomNav.Navigator>
     </View>
   ) : (

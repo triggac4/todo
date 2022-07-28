@@ -23,6 +23,8 @@ const colorScheme = {
   white: "#fff",
   black: "#000",
   gray: "#9B9B9B",
+  maroonRed: "#800000",
+  lemonGreen: "#e3ff00",
 };
 
 const spacing = {
