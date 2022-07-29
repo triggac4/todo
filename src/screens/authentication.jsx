@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { View, Text, Button, StyleSheet, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BorderButton from "../component/button/borderButton";
@@ -6,14 +6,15 @@ import CustomPlainButton from "../component/button/plainButton";
 import PrimaryButton from "../component/button/primaryButton";
 import CustomTextfield from "../component/form/textfield";
 import generalStyling from "../utility/generalStyling";
-
+import { useDispatch } from "react-redux";
+import { logIn, signUp } from "../feature/user/userSlice";
 
 const AuthScreen = (props) => {
   const style = StyleSheet.create({
     container: {
       height: "100%",
       justifyContent: "center",
-      padding:generalStyling.spacing.sm
+      padding: generalStyling.spacing.sm,
     },
     AuthContainer: {
       width: "100%",
@@ -24,14 +25,25 @@ const AuthScreen = (props) => {
       flexDirection: "row",
       justifyContent: "space-around",
       alignItems: "center",
-      
     },
-
     textStyle: {
       fontSize: generalStyling.fontSize.p1,
     },
   });
   const [isLogin, setIsLogin] = useState(true);
+  const formRef = useRef({});
+  const onChange = (text, name) => {
+    formRef.current = { ...formRef.current, [name]: text };
+  };
+
+  const dispatch = useDispatch();
+  const onSubmit = () => {
+    if (isLogin) {
+      dispatch(logIn(formRef.current));
+    } else {
+      dispatch(signUp(formRef.current));
+    }
+  };
 
   return (
     <SafeAreaView>
@@ -39,16 +51,33 @@ const AuthScreen = (props) => {
         <View style={style.AuthContainer}>
           {!isLogin && (
             <>
-              <CustomTextfield placeholder={"first name"} />
-              <CustomTextfield placeholder={"surname"} />
+              <CustomTextfield
+                placeholder={"first name"}
+                onChange={onChange}
+                name={"firstname"}
+              />
+              <CustomTextfield
+                placeholder={"surname"}
+                onChange={onChange}
+                name={"surname"}
+              />
             </>
           )}
 
-          <CustomTextfield placeholder={"username"} />
-          <CustomTextfield placeholder={"password"} isPassword />
+          <CustomTextfield
+            placeholder={"username"}
+            onChange={onChange}
+            name="username"
+          />
+          <CustomTextfield
+            placeholder={"password"}
+            name="password"
+            isPassword
+            onChange={onChange}
+          />
           <PrimaryButton
             title={isLogin ? "Sign In" : "Sign Up"}
-            onPress={() => {}}
+            onPress={() => onSubmit()}
           />
           <View style={style.switchModeContainer}>
             <Text style={style.textStyle}>

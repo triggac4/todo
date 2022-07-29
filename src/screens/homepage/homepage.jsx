@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AuthScreen from "../authentication";
 import TaskCard from "../../component/card/taskCard";
 import TaskList from "./listTask";
+import { useSelector } from "react-redux";
 
 const BottomNav = createBottomTabNavigator();
 export const screenName = "homepage";
@@ -49,8 +50,9 @@ const Screenee = () => {
   );
 };
 const Homepage = (props) => {
-  const [authenticated, setAuthenticated] = useState(true);
-  return authenticated ? (
+  const user = useSelector((state) => state.user);
+  
+  return user.authenticated ? (
     <View
       style={{
         flexDirection: "row",
