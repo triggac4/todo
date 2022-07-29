@@ -13,6 +13,7 @@ const TaskCard = ({ data }) => {
         width: 0,
         height: 2,
       },
+      minHeight:100,
       shadowOpacity: 0.5,
       shadowRadius: 2.25,
       elevation: generalStyling.spacing.sm,
@@ -35,7 +36,7 @@ const TaskCard = ({ data }) => {
           height: "100%",
           width: generalStyling.spacing.sm,
           backgroundColor: data?.completed
-            ? generalStyling.colorScheme.lemonGreen
+            ? generalStyling.colorScheme.green
             : generalStyling.colorScheme.maroonRed,
         }}
       ></View>
@@ -46,9 +47,9 @@ const TaskCard = ({ data }) => {
             width: "70%",
         }}>{data?.title}</Text>
         <BorderButton
-          title={"delete"}
+          title={"Delete"}
           onPress={() => console.log("delete")}
-          color={generalStyling.colorScheme.maroonRed}
+          color={generalStyling.colorScheme.red}
         />
       </View>
     </View>

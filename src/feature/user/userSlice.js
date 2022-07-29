@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const randomNumber = (start, end) => {
-  return Math.floor(Math.random() * (end + 1 )+ start);
+  return Math.floor(Math.random() * (end + 1) + start);
 };
 initialState = {
   authenticated: false,
-  currentUser: {},
+  currentUser: {
+    id: 1,
+    firstname: "John",
+    surname: "Doe",
+    username: "kene3055",
+    password: "Password123",
+  },
   isLoading: false,
   allUsers: [
     {

@@ -5,11 +5,14 @@ import AuthScreen from "./src/screens/authentication";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import screenName from "./src/screens";
 import Homepage from "./src/screens/homepage/homepage";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import store from "./src/feature";
+import { getAllTask } from "./src/feature/task/thunkActions";
+import React from "react";
 
 const StackNav = createNativeStackNavigator();
 export default function App() {
+  
   return (
     <Provider store={store}>
     <View style={styles.container}>

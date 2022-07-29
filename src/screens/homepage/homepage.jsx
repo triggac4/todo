@@ -8,7 +8,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AuthScreen from "../authentication";
 import TaskCard from "../../component/card/taskCard";
 import TaskList from "./listTask";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllTask } from "../../feature/task/thunkActions";
 
 const BottomNav = createBottomTabNavigator();
 export const screenName = "homepage";
@@ -24,7 +25,7 @@ const style = StyleSheet.create({
 });
 const Screen = () => {
   return (
-    <SafeAreaView style={{ marginTop: StatusBar.currentHeight }}>
+    <SafeAreaView >
       <TaskList />
     </SafeAreaView>
   );
@@ -50,8 +51,13 @@ const Screenee = () => {
   );
 };
 const Homepage = (props) => {
+  const dispatch=useDispatch()
+  React.useEffect(() => {
+    dispatch(getAllTask());
+  },[])
+
   const user = useSelector((state) => state.user);
-  
+
   return user.authenticated ? (
     <View
       style={{
@@ -62,16 +68,8 @@ const Homepage = (props) => {
       }}
     >
       <BottomNav.Navigator defaultScreenOptions={{ headerShown: false }}>
-        <BottomNav.Screen
-          name="all"
-          component={Screen}
-          options={{ headerShown: false }}
-        />
-        <BottomNav.Screen
-          name="completed"
-          component={Screene}
-          options={{ headerShown: false }}
-        />
+        <BottomNav.Screen name="all" component={Screen} />
+        <BottomNav.Screen name="completed" component={Screene} />
       </BottomNav.Navigator>
     </View>
   ) : (
