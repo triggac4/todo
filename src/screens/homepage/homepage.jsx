@@ -67,7 +67,6 @@ const Homepage = (props) => {
           tabBarShowLabel: false,
           tabBarStyle: {
             height: 80,
-            marginBottom: generalStyling.spacing.sm,
             elevation: 5,
           },
         }}
@@ -81,7 +80,7 @@ const Homepage = (props) => {
                 icon={
                   <AntIcon
                     name="home"
-                    size={25}
+                    size={focused ? 35 : 25}
                     color={bottomNavColor(focused)}
                   />
                 }
@@ -103,7 +102,7 @@ const Homepage = (props) => {
                 icon={
                   <MaterialIcon
                     name="done-all"
-                    size={25}
+                    size={focused ? 35 : 25}
                     color={bottomNavColor(focused)}
                   />
                 }

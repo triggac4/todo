@@ -8,6 +8,7 @@ const TaskList = ({ isCompleted }) => {
   const userData = useSelector((state) => state.user.currentUser);
   return (
     <FlatList
+      numColumns={2}
       data={taskData.tasks.filter((e) => {
         const usersDataCheck = e.userId === userData.id;
         const completedCheck = isCompleted ? e.completed : true;

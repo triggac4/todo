@@ -3,8 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import generalStyling from "../../utility/generalStyling";
 
 const BottomNavButton = ({ icon, label, color }) => {
-  console.log(color);
-  const style = StyleSheet.create({
+ const style = StyleSheet.create({
     container: {
       justifyContent: "center",
       alignItems: "center",

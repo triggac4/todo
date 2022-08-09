@@ -19,9 +19,9 @@ const TaskCard = ({ data }) => {
       elevation: generalStyling.spacing.sm,
       margin: generalStyling.spacing.sm,
       justifyContent: "space-between",
-    },
+      width:"45%",
+      },
     innerContainer: {
-      flexDirection: "row",
       padding: generalStyling.spacing.sm,
       flex: 1,
       alignItems: "center",
@@ -44,8 +44,8 @@ const TaskCard = ({ data }) => {
         <Text style={{
             fontSize: generalStyling.fontSize.p1,
             fontWeight:generalStyling.fontWeight.semiBold,
-            width: "70%",
-        }}>{data?.title}</Text>
+            marginBottom:generalStyling.spacing.sm,
+            }}>{data?.title}</Text>
         <BorderButton
           title={"Delete"}
           onPress={() => console.log("delete")}
