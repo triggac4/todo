@@ -1,13 +1,12 @@
 import React, { useState, useRef } from "react";
 import { View, Text, Button, StyleSheet, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import BorderButton from "../component/button/borderButton";
-import CustomPlainButton from "../component/button/plainButton";
-import PrimaryButton from "../component/button/primaryButton";
-import CustomTextfield from "../component/form/textfield";
-import generalStyling from "../utility/generalStyling";
 import { useDispatch } from "react-redux";
-import { logIn, signUp } from "../feature/user/userSlice";
+import BorderButton from "../../component/button/borderButton";
+import PrimaryButton from "../../component/button/primaryButton";
+import CustomTextfield from "../../component/form/textfield";
+import { logIn, signUp } from "../../feature/user/userSlice";
+import generalStyling from "../../utility/generalStyling";
 
 const AuthScreen = (props) => {
   const style = StyleSheet.create({

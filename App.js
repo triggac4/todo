@@ -1,13 +1,11 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import AuthScreen from "./src/screens/authentication";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import screenName from "./src/screens";
-import Homepage from "./src/screens/homepage/homepage";
+import Homepage from "./src/screens/homepage";
 import { Provider, useDispatch } from "react-redux";
 import store from "./src/feature";
-import { getAllTask } from "./src/feature/task/thunkActions";
 import React from "react";
 
 const StackNav = createNativeStackNavigator();

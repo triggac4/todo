@@ -5,12 +5,14 @@ import PrimaryButton from "../../component/button/primaryButton";
 import CustomTextfield from "../../component/form/textfield";
 import generalStyling from "../../utility/generalStyling";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import AuthScreen from "../authentication";
+import AuthScreen from "./authentication";
 import TaskCard from "../../component/card/taskCard";
 import TaskList from "../../component/listTask";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTask } from "../../feature/task/thunkActions";
-import Icon from "react-native-vector-icons/AntDesign";
+import AntIcon from "react-native-vector-icons/AntDesign";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import BottomNavButton from "../../component/navigation/bottomNav";
 
 const BottomNav = createBottomTabNavigator();
 export const screenName = "homepage";
@@ -34,32 +36,23 @@ const Screen = () => {
 const Screene = () => {
   return (
     <SafeAreaView>
-      <View style={style.container}>
-        <Text style={{ color: "black" }}>Screen 3dlkcnsdjvkbkbsvkbvkbsf</Text>
-        <PrimaryButton title={"Sign In"} onPress={() => {}} />
-      </View>
+      <TaskList isCompleted />
     </SafeAreaView>
   );
 };
-const Screenee = () => {
-  return (
-    <SafeAreaView>
-      <View style={style.container}>
-        <Text style={{ color: "black" }}>Screen 3dlkcnsdjvkbkbsvkbvkbsf</Text>
-        <PrimaryButton title={"Sign In"} onPress={() => {}} />
-      </View>
-    </SafeAreaView>
-  );
-};
+
 const Homepage = (props) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(getAllTask());
   }, []);
 
-  const user = useSelector((state) => state.user);
+  const bottomNavColor = (focused) =>
+    focused
+      ? generalStyling.colorScheme.PrimaryLight
+      : generalStyling.colorScheme.gray;
 
-  return user.authenticated ? (
+  return (
     <View
       style={{
         flexDirection: "row",
@@ -70,32 +63,30 @@ const Homepage = (props) => {
     >
       <BottomNav.Navigator
         activeColor={generalStyling.colorScheme.PrimaryLight}
-        defaultScreenOptions={{
-          headerShown: false,
-          tabBarStyle: ({ focused }) => ({
-            color: focused
-              ? generalStyling.colorScheme.PrimaryLight
-              : generalStyling.colorScheme.gray,
-            backgroundColor: focused
-              ? generalStyling.colorScheme.PrimaryLight
-              : generalStyling.colorScheme.gray,
-          }),
+        screenOptions={{
+          tabBarShowLabel: false,
+          tabBarStyle: {
+            height: 80,
+            marginBottom: generalStyling.spacing.sm,
+            elevation: 5,
+          },
         }}
       >
         <BottomNav.Screen
-          name="all"
+          name="All Tasks"
           component={Screen}
           options={{
-            tabBarLabel: "All",
             tabBarIcon: ({ color, focused }) => (
-              <Icon
-                name="home"
-                size={30}
-                color={
-                  focused
-                    ? generalStyling.colorScheme.PrimaryLight
-                    : generalStyling.colorScheme.gray
+              <BottomNavButton
+                icon={
+                  <AntIcon
+                    name="home"
+                    size={25}
+                    color={bottomNavColor(focused)}
+                  />
                 }
+                label={"All tasks"}
+                color={bottomNavColor(focused)}
               />
             ),
           }}
@@ -105,15 +96,23 @@ const Homepage = (props) => {
           component={Screene}
           options={{
             tabBarLabel: "All",
-            tabBarIcon: ({ color, focused }) => (
-              <Icon name="home" size={30} color={color} />
+            tabBarIcon: ({ focused }) => (
+              <BottomNavButton
+                label={"Completed"}
+                color={bottomNavColor(focused)}
+                icon={
+                  <MaterialIcon
+                    name="done-all"
+                    size={25}
+                    color={bottomNavColor(focused)}
+                  />
+                }
+              />
             ),
           }}
         />
       </BottomNav.Navigator>
     </View>
-  ) : (
-    <AuthScreen />
   );
 };
 
