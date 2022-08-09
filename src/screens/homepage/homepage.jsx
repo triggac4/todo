@@ -7,9 +7,10 @@ import generalStyling from "../../utility/generalStyling";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AuthScreen from "../authentication";
 import TaskCard from "../../component/card/taskCard";
-import TaskList from "./listTask";
+import TaskList from "../../component/listTask";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTask } from "../../feature/task/thunkActions";
+import Icon from "react-native-vector-icons/AntDesign";
 
 const BottomNav = createBottomTabNavigator();
 export const screenName = "homepage";
@@ -25,7 +26,7 @@ const style = StyleSheet.create({
 });
 const Screen = () => {
   return (
-    <SafeAreaView >
+    <SafeAreaView>
       <TaskList />
     </SafeAreaView>
   );
@@ -51,10 +52,10 @@ const Screenee = () => {
   );
 };
 const Homepage = (props) => {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(getAllTask());
-  },[])
+  }, []);
 
   const user = useSelector((state) => state.user);
 
@@ -67,9 +68,48 @@ const Homepage = (props) => {
         height: "100%",
       }}
     >
-      <BottomNav.Navigator defaultScreenOptions={{ headerShown: false }}>
-        <BottomNav.Screen name="all" component={Screen} />
-        <BottomNav.Screen name="completed" component={Screene} />
+      <BottomNav.Navigator
+        activeColor={generalStyling.colorScheme.PrimaryLight}
+        defaultScreenOptions={{
+          headerShown: false,
+          tabBarStyle: ({ focused }) => ({
+            color: focused
+              ? generalStyling.colorScheme.PrimaryLight
+              : generalStyling.colorScheme.gray,
+            backgroundColor: focused
+              ? generalStyling.colorScheme.PrimaryLight
+              : generalStyling.colorScheme.gray,
+          }),
+        }}
+      >
+        <BottomNav.Screen
+          name="all"
+          component={Screen}
+          options={{
+            tabBarLabel: "All",
+            tabBarIcon: ({ color, focused }) => (
+              <Icon
+                name="home"
+                size={30}
+                color={
+                  focused
+                    ? generalStyling.colorScheme.PrimaryLight
+                    : generalStyling.colorScheme.gray
+                }
+              />
+            ),
+          }}
+        />
+        <BottomNav.Screen
+          name="completed"
+          component={Screene}
+          options={{
+            tabBarLabel: "All",
+            tabBarIcon: ({ color, focused }) => (
+              <Icon name="home" size={30} color={color} />
+            ),
+          }}
+        />
       </BottomNav.Navigator>
     </View>
   ) : (

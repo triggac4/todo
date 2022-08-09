@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList } from "react-native";
 import { useSelector } from "react-redux";
-import TaskCard from "../../component/card/taskCard";
+import TaskCard from "./card/taskCard";
 
 const TaskList = () => {
   const taskData=useSelector(state=>state.task);
