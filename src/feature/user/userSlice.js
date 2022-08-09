@@ -1,26 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const randomNumber = (start, end) => {
+export const randomNumber = (start, end) => {
   return Math.floor(Math.random() * (end + 1) + start);
 };
 initialState = {
   authenticated: false,
-  currentUser: {
-    id: 1,
-    firstname: "John",
-    surname: "Doe",
-    username: "kene3055",
-    password: "Password123",
-  },
+  currentUser: null,
   isLoading: false,
   allUsers: [
-    {
-      id: 1,
-      firstname: "John",
-      surname: "Doe",
-      username: "kene3055",
-      password: "Password123",
-    },
   ],
 };
 
@@ -29,6 +17,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logIn: (state, action) => {
+      console.log(state?.allUsers)
       const user = state?.allUsers?.find((user) => {
         return (
           user.username === action.payload.username &&
@@ -40,29 +29,15 @@ const userSlice = createSlice({
         state.currentUser = user;
       }
     },
-    signUp: (state, action) => {
-      const { firstname, surname, username, password } = action.payload;
-
-      if (firstname && surname && username && password) {
-        const newUser = {
-          id: randomNumber(1, 10),
-          firstname,
-          surname,
-          username,
-          password,
-        };
-
-        state.allUsers.push(newUser);
-        state.authenticated = true;
-        state.currentUser = newUser;
-        console.log(state.allUsers);
-      }
+    updateUsers: (state, action) => {
+      state.allUsers=action.payload;
     },
-    logOut: (state) => {
-      state.authenticated = false;
-      state.currentUser = {};
+    changeAuthentication: (state, action) => {
+      state.authenticated = action.payload?.authenticated;
+      state.currentUser = action.payload?.currentUser;
     },
   },
 });
-export const { logIn, signUp } = userSlice.actions;
+export const { logIn, updateUsers, changeAuthentication, initialLoad } =
+  userSlice.actions;
 export default userSlice.reducer;

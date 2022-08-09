@@ -5,8 +5,9 @@ import { useDispatch } from "react-redux";
 import BorderButton from "../../component/button/borderButton";
 import PrimaryButton from "../../component/button/primaryButton";
 import CustomTextfield from "../../component/form/textfield";
-import { logIn, signUp } from "../../feature/user/userSlice";
+import { logIn } from "../../feature/user/userSlice";
 import generalStyling from "../../utility/generalStyling";
+import { signUp } from "../../feature/user/thunkActions";
 
 const AuthScreen = (props) => {
   const style = StyleSheet.create({
