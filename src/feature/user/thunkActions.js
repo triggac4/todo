@@ -12,6 +12,8 @@ export const signUp = createAsyncThunk("user/signUp", async (action, thunk) => {
         surname,
         username,
         password,
+
+        
       };
       //make sure the last object in the list ends with a comma for some weird reasons JSON stringify doesn't work without it sometimes**
       const update = [...user.allUsers, newUser];
